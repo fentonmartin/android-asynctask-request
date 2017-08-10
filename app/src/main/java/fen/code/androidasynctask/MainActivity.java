@@ -13,8 +13,7 @@ import java.net.URLConnection;
 
 public class MainActivity extends AppCompatActivity {
 
-    AsyncTask<String, String, String> mTask;
-    private static String url = "YOUR URL";
+    String url = "YOUR URL";
     TextView textView;
 
     @Override
@@ -23,13 +22,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         textView = (TextView) findViewById(R.id.textview);
 
-        mTask = new AsyncTask<String, String, String>() {
+        AsyncTask<String, String, String> mTask = new AsyncTask<String, String, String>() {
 
             @Override
             protected String doInBackground(String... params) {
                 try {
                     return getJsonFromServer(url);
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -43,12 +41,10 @@ public class MainActivity extends AppCompatActivity {
                     textView.setText(result);
             }
         };
-
         mTask.execute();
     }
 
     public static String getJsonFromServer(String url) throws IOException {
-
         URL jsonUrl = new URL(url);
         URLConnection dc = jsonUrl.openConnection();
 
