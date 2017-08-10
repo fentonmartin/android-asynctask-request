@@ -21,15 +21,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         textView = (TextView) findViewById(R.id.textview);
-
         mTask = new AsyncTask<String, String, String>() {
-
             @Override
             protected String doInBackground(String... params) {
                 try {
                     return getJsonFromServer(url);
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -43,20 +41,18 @@ public class MainActivity extends AppCompatActivity {
                     textView.setText(result);
             }
         };
-
         mTask.execute();
     }
 
     public static String getJsonFromServer(String url) throws IOException {
-
         URL jsonUrl = new URL(url);
         URLConnection dc = jsonUrl.openConnection();
 
         dc.setConnectTimeout(5000);
         dc.setReadTimeout(5000);
 
-        BufferedReader inputStream = new BufferedReader(new InputStreamReader(
-                dc.getInputStream()));
+        BufferedReader inputStream = new BufferedReader(
+                new InputStreamReader(dc.getInputStream()));
 
         String jsonResult = inputStream.readLine();
         inputStream.close();
